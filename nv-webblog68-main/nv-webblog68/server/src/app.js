@@ -1,16 +1,19 @@
-let express = require('express')
-let bodyParser = require('body-parser')
- 
-const app = express()
- 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: true}))
+const express = require('express')
+const cors = require('cors')
+const { sequelize } = require('./models')
+const config = require('./config/config')
 
-// เรียกใช้ routes โดยส่ง app เข้าไป
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(cors())
+
+// เรียกใช้ Routes ที่เราแยกไฟล์ไว้
 require('./routes')(app)
 
-let port = 8081
-app.listen(port, function () {
-    console.log('server running on ' + port)
+sequelize.sync({ force: false }).then(() => {
+    app.listen(config.port, () => {
+        console.log('Server running on port ' + config.port)
+    })
 })
- 
+

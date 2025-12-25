@@ -24,3 +24,4 @@ module.exports = {
         res.send('ดูข้อมูลผู้ใช้งาน: ' + req.params.userId)
     }
 }
+
