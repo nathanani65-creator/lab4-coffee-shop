@@ -1,39 +1,47 @@
 import { createRouter, createWebHistory } from 'vue-router'
+// --- Import Components ของ User (จากบทที่ 7) ---
+import UserIndex from '../components/Users/Index.vue'  
+// ... (UserCreate, UserEdit, UserShow) ...
 
-// Import Components
-import UserCreate from '../components/Users/CreateUser.vue'
-import UserEdit from '../components/Users/EditUser.vue'
-import UserShow from '../components/Users/ShowUser.vue'
-import UserIndex from '../components/Users/Index.vue'
-
-
-const router = createRouter({
- history: createWebHistory(import.meta.env.BASE_URL),
-
-  routes: [
-    {
-      path: '/users',
-      name: 'users',
-      component: UserIndex
+// --- Import Components ของ Menu (สำหรับปฏิบัติการบทที่ 7) ---
+import MenuIndex from '../components/Menus/Index.vue'
+import MenuCreate from '../components/Menus/CreateMenu.vue'
+import MenuEdit from '../components/Menus/EditMenu.vue'
+import MenuShow from '../components/Menus/ShowMenu.vue'
+  
+const router = createRouter({  
+  history: createWebHistory(import.meta.env.BASE_URL),  
+  routes: [  
+    // ... User Routes ...
+    {  
+      path: '/users',  
+      name: 'users',  
+      component: UserIndex  
     },
-    {
-      path: '/user/create',
-      name: 'users-create',
-      component: UserCreate
-    },
-    {
-      path: '/user/edit/:userId', // เพิ่ม :userId เพื่อรับค่า
-      name: 'user-edit',
-      component: UserEdit
-    },
-    {
-      path: '/user/:userId', // เพิ่ม :userId
-      name: 'user',
-      component: UserShow
-    }
+    // ... เส้นทางอื่น ๆ ของ User ...
 
-
-  ]
-})
-
+    // --- Menu Routes ---
+    {  
+      path: '/menus',  
+      name: 'menus',  
+      component: MenuIndex  // หน้ารายการเมนู
+    },  
+    {  
+      path: '/menu/create',  
+      name: 'menu-create',  
+      component: MenuCreate // หน้าสร้างเมนูใหม่
+    },  
+    {  
+      path: '/menu/edit/:menuId', // กำหนดให้รับ Parameter :menuId สำหรับแก้ไข
+      name: 'menu-edit',  
+      component: MenuEdit  
+    },  
+    {  
+      path: '/menu/:menuId', // กำหนดให้รับ Parameter :menuId สำหรับดูรายละเอียด
+      name: 'menu-show',  
+      component: MenuShow
+    }  
+  ]  
+})  
+  
 export default router

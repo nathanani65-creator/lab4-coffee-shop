@@ -13,8 +13,11 @@ export default {
     }
   },
   created () {
-    // ดึงค่า userId จาก URL
-    this.userId = this.$route.params.userId
+    // โค้ดนี้ถูกรันทันทีที่ Component ถูกสร้างขึ้น (ก่อนเมาท์)
+    this.userId = this.$route.params.userId 
+    // ณ จุดนี้ this.userId ได้รับค่าแล้ว และจะถูกใช้ในการ Render UI
   }
 }
+
+
 </script>
