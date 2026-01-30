@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>CreateMenu</h1> 
+    <h1>Create Menu</h1> 
   </div>
 </template>
  

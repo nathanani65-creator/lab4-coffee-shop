@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>ShowMenu.vue</h1> 
+    <h1>Show Menu</h1> 
   </div>
 </template>
  
