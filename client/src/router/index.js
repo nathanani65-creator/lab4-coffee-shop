@@ -16,7 +16,9 @@ import MenuShow from '../components/Menus/ShowMenu.vue'
 import CoffeeIndex from '../components/coffees/index.vue'
 import CoffeeCreate from '../components/coffees/CreateCoffee.vue'
 import CoffeeEdit from '../components/coffees/EditCoffee.vue'
-import CoffeeShow from '../components/coffees/ShowCoffee.vue'   // ⭐ เพิ่มบรรทัดนี้
+import CoffeeShow from '../components/coffees/ShowCoffee.vue'
+import Login from '../components/Login.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -85,7 +87,13 @@ const router = createRouter({
       path: '/coffee/:coffeeId',          // ⭐ เพิ่ม route ดูรายละเอียด
       name: 'coffee-show',
       component: CoffeeShow
-    }
+    },
+    {
+    path: '/login',
+    name: 'login',
+    component: Login
+}
+
   ]
 })
 

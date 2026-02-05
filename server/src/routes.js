@@ -1,6 +1,7 @@
 // src/routes.js
 
 const CoffeeController = require('./controllers/CoffeeController')
+const isAuthenController = require('./controllers/isAuthenController')
 const UserController = require('./controllers/UserController')
 const UserAuthenController = require('./controllers/UserAuthenController')
 
@@ -14,6 +15,7 @@ module.exports = (app) => {
     app.post('/user', UserController.create)  // เพิ่มผู้ใช้
     app.put('/user/:userId', UserController.put) // แก้ไขผู้ใช้
     app.delete('/user/:userId', UserController.remove) // ลบผู้ใช้
+    app.get('/users', isAuthenController, UserController.index)
 
 
     // ===============================

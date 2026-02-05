@@ -12,6 +12,8 @@ app.use(cors())
 
 // --- Routes Section ---
 require('./routes')(app)
+require('./userPassport')
+require('./routes')(app)
 
 // --- Server Startup Section ---
 const port = config.port

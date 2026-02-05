@@ -15,6 +15,7 @@
         <div>email: {{ user.email }}</div>
         <div>status: {{ user.status }}</div>
         <div>type: {{ user.type }}</div>
+        
 
         <!-- ⭐ ปุ่มตามสไลด์อาจารย์ -->
         <p>
