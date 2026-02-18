@@ -1,3 +1,3 @@
 # nv-webblog68
-thanaphat teeraphatchararunksi
+Arkhom Jittorn
 CSIT

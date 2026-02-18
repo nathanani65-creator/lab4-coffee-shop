@@ -1,5 +1,10 @@
 <template>
   <div>
+    <!-- ⭐ ปุ่ม Logout -->
+    <p>
+      <button v-on:click="logout">Logout</button>
+    </p>
+
     <h1>Get All Users</h1>
 
     <div>จำนวนผู้ใช้งาน {{ users.length }}</div>
@@ -15,9 +20,8 @@
         <div>email: {{ user.email }}</div>
         <div>status: {{ user.status }}</div>
         <div>type: {{ user.type }}</div>
-        
 
-        <!-- ⭐ ปุ่มตามสไลด์อาจารย์ -->
+        <!-- ⭐ ปุ่มเดิมทั้งหมด -->
         <p>
           <button v-on:click="navigateTo('/user/' + user.id)">
             ดูข้อมูลผู้ใช้
@@ -27,7 +31,6 @@
             แก้ไขข้อมูล
           </button>
 
-          <!-- ⭐ ปุ่มลบ -->
           <button v-on:click="deleteUser(user)">
             ลบข้อมูล
           </button>
@@ -45,6 +48,7 @@
 
 <script>
 import UsersService from '../../services/UsersService'
+import { useAuthenStore } from '../../stores/authen'
 
 export default {
   data () {
@@ -62,9 +66,9 @@ export default {
       this.$router.push(route)
     },
 
-    // ⭐  ลบผู้ใช้ (ตามสไลด์)
+    // ⭐ ลบผู้ใช้ (ของเดิม)
     async deleteUser (user) {
-      let result = confirm("Want to delete?")
+      let result = confirm('Want to delete?')
       if (result) {
         try {
           await UsersService.delete(user)
@@ -75,9 +79,19 @@ export default {
       }
     },
 
-    // ⭐ โหลดข้อมูลใหม่หลังลบ
+    // ⭐ โหลดข้อมูลใหม่ (ของเดิม)
     async refreshData () {
       this.users = (await UsersService.index()).data
+    },
+
+    // ⭐ Logout (เพิ่มใหม่)
+    logout () {
+      const authenStore = useAuthenStore()
+      authenStore.logout()   // ล้าง token + user
+
+      this.$router.push({
+        name: 'login'
+      })
     }
   }
 }

@@ -1,6 +1,6 @@
 <<<<<<< HEAD
 # nv-webblog68
-thanakorn nakphook
+Arkhom Jittorn
 CSIT
 =======
 # Vue 3 + Vite

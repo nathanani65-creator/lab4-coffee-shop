@@ -5,16 +5,14 @@
       <p>Username: <input type="text" v-model="email" /></p>
       <p>Password: <input type="password" v-model="password" /></p>
       <p><button type="submit">Login</button></p>
-     
       <div class="error" v-if="error">{{error}}</div>
     </form>
   </div>
 </template>
 
 <script>
-import AuthenService from '../services/AuthenService'
-import { useAuthenStore } from '../stores/authen' // เรียกใช้ Store
-
+import AuthenService from '@/services/AuthenService'
+import { useAuthenStore } from '@/stores/authen' // เรียกใช้ Store
 
 export default {
   data () {
@@ -32,9 +30,6 @@ export default {
           password: this.password
         })
         
-        console.log(response.data) // ดูค่าที่ได้ก่อน
-
-         
         // เรียกใช้ Store
         const authenStore = useAuthenStore()
         
@@ -42,8 +37,6 @@ export default {
         authenStore.setToken(response.data.token)
         authenStore.setUser(response.data.user)
         
-
-    
         this.$router.push({
           name: 'users'
         })
@@ -56,9 +49,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.error {
-  color: red;
-}
-</style>
