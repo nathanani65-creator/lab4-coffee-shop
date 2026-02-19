@@ -5,6 +5,9 @@ const UserController = require('./controllers/UserController')
 const UserAuthenController = require('./controllers/UserAuthenController')
 const isAuthenController = require('./controllers/isAuthenController')
 const BlogController = require('./controllers/BlogController')
+const UploadController = require('./controllers/UploadController') // Import upload controller
+const fileUploadMiddleware = require('./middleware/fileUpload') // Import Middleware
+
 
 module.exports = (app) => {
 
@@ -13,6 +16,9 @@ module.exports = (app) => {
   // ===============================
   app.post('/login', UserAuthenController.login)
   app.post('/register', UserAuthenController.register)
+  app.post('/upload', fileUploadMiddleware, UploadController.upload)
+}
+
 
   // ===============================
   // Users Routes (ต้อง login ก่อน)
@@ -52,4 +58,5 @@ module.exports = (app) => {
   app.delete('/blog/:blogId', BlogController.remove)
   app.get('/blog/:blogId', BlogController.show)
   app.get('/blogs', BlogController.index)
-}
+ 
+

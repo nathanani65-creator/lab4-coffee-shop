@@ -8,6 +8,8 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use('/assets', express.static('public'))
+
 require('./routes')(app)
 
 require('./userPassport')

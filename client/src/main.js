@@ -5,8 +5,11 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
 import router from './router'
 
-// ⭐ เพิ่มบรรทัดนี้
+
 import CoffeeHeader from './components/CoffeeHeader.vue'
+
+import { CkeditorPlugin } from '@ckeditor/ckeditor5-vue' // [เพิ่ม] Import 
+
 
 import './style.css'
 
@@ -16,6 +19,7 @@ const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
 app.use(pinia)
+app.use(CkeditorPlugin) 
 app.use(router)
 
 // ⭐ ลงทะเบียน Global Component
