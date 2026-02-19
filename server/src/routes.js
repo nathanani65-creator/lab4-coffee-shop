@@ -4,6 +4,7 @@ const CoffeeController = require('./controllers/CoffeeController')
 const UserController = require('./controllers/UserController')
 const UserAuthenController = require('./controllers/UserAuthenController')
 const isAuthenController = require('./controllers/isAuthenController')
+const BlogController = require('./controllers/BlogController')
 
 module.exports = (app) => {
 
@@ -26,8 +27,29 @@ module.exports = (app) => {
   // Coffee Routes
   // ===============================
   app.get('/coffees', CoffeeController.index)
-  app.post('/coffee', isAuthenController, CoffeeController.create)
-  app.put('/coffee/:coffeeId', isAuthenController, CoffeeController.put)
-  app.delete('/coffee/:coffeeId', isAuthenController, CoffeeController.remove)
   app.get('/coffee/:coffeeId', CoffeeController.show)
+
+  app.post('/coffee',
+    isAuthenController,
+    CoffeeController.create
+  )
+
+  app.put('/coffee/:coffeeId',
+    isAuthenController,
+    CoffeeController.update
+  )
+
+  app.delete('/coffee/:coffeeId',
+    isAuthenController,
+    CoffeeController.delete
+  )
+
+  // ===============================
+  // Blog Routes
+  // ===============================
+  app.post('/blog', BlogController.create)
+  app.put('/blog/:blogId', BlogController.put)
+  app.delete('/blog/:blogId', BlogController.remove)
+  app.get('/blog/:blogId', BlogController.show)
+  app.get('/blogs', BlogController.index)
 }

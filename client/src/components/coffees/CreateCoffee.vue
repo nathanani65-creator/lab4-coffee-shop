@@ -23,6 +23,16 @@
         </select>
       </div>
 
+      <!-- ✅ เพิ่ม status -->
+      <div>
+        <label>สถานะ</label><br />
+        <select v-model="coffee.status" required>
+          <option value="">-- เลือกสถานะ --</option>
+          <option value="มีจำหน่าย">มีจำหน่าย</option>
+          <option value="หมด">หมด</option>
+        </select>
+      </div>
+
       <div>
         <label>รายละเอียด</label><br />
         <textarea v-model="coffee.description"></textarea>
@@ -48,6 +58,7 @@ export default {
         name: '',
         price: null,
         type: '',
+        status: '',        // ✅ เพิ่มอันนี้
         description: ''
       }
     }

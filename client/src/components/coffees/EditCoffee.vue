@@ -11,7 +11,7 @@
 
       <p>
         Price:
-        <input v-model="coffee.price" type="number" />
+        <input v-model.number="coffee.price" type="number" />
       </p>
 
       <p>
@@ -20,6 +20,15 @@
           <option value="hot">hot</option>
           <option value="iced">iced</option>
           <option value="frappe">frappe</option>
+        </select>
+      </p>
+
+      <!-- ✅ เพิ่ม Status ตรงนี้ -->
+      <p>
+        Status:
+        <select v-model="coffee.status">
+          <option value="มีจำหน่าย">มีจำหน่าย</option>
+          <option value="หมด">หมด</option>
         </select>
       </p>
 
@@ -51,20 +60,14 @@ export default {
   },
 
   async created () {
-    // 1️⃣ ดึง coffeeId จาก URL
     const coffeeId = this.$route.params.coffeeId
-
-    // 2️⃣ ดึงข้อมูลเดิมจาก backend
     this.coffee = (await CoffeesService.show(coffeeId)).data
   },
 
   methods: {
     async updateCoffee () {
       try {
-        // 3️⃣ ส่งข้อมูลไปอัปเดต
         await CoffeesService.put(this.coffee)
-
-        // 4️⃣ กลับไปหน้ารายการกาแฟ
         this.$router.push('/coffees')
       } catch (err) {
         console.log(err)

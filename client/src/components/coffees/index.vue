@@ -14,6 +14,7 @@
         <div>ชื่อเมนู: {{ coffee.name }}</div>
         <div>ราคา: {{ coffee.price }}</div>
         <div>ประเภท: {{ coffee.type }}</div>
+        <div>สถานะ: {{ coffee.status }}</div> <!-- ✅ เพิ่มบรรทัดนี้ -->
 
         <p>
           <!-- ทุกคนดูรายละเอียดได้ -->
@@ -27,7 +28,8 @@
               แก้ไข
             </button>
 
-            <button @click="deleteCoffee(coffee)">
+            <!-- ✅ ส่ง id แทน object -->
+            <button @click="deleteCoffee(coffee.id)">
               ลบเมนู
             </button>
           </template>
@@ -59,7 +61,6 @@ export default {
   },
 
   computed: {
-    // ✅ ตรวจสอบสถานะ Login จาก Pinia
     isLoggedIn () {
       const authenStore = useAuthenStore()
       return authenStore.isUserLoggedIn
@@ -71,11 +72,11 @@ export default {
       this.$router.push(route)
     },
 
-    async deleteCoffee (coffee) {
+    async deleteCoffee (coffeeId) {   // ✅ รับ id
       const result = confirm('Want to delete?')
       if (result) {
         try {
-          await CoffeesService.delete(coffee)
+          await CoffeesService.delete(coffeeId) // ✅ ส่ง id
           this.refreshData()
         } catch (err) {
           console.log(err)

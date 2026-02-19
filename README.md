@@ -1,3 +1,3 @@
 # nv-webblog68
-Nathanan Insuwan
+Arkhom Jittorn
 CSIT

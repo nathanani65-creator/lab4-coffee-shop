@@ -13,12 +13,10 @@ import MenuEdit from '../components/Menus/EditMenu.vue'
 import MenuShow from '../components/Menus/ShowMenu.vue'
 
 // ===== Coffees =====
-// Coffees
-import CoffeeIndex  from '../components/Coffees/Index.vue'
+import CoffeeIndex from '../components/Coffees/Index.vue'
 import CoffeeCreate from '../components/Coffees/CreateCoffee.vue'
-import CoffeeEdit   from '../components/Coffees/EditCoffee.vue'
-import CoffeeShow   from '../components/Coffees/ShowCoffee.vue'
-
+import CoffeeEdit from '../components/Coffees/EditCoffee.vue'
+import CoffeeShow from '../components/Coffees/ShowCoffee.vue'
 
 // ===== Orders (เพิ่มตามโจทย์) =====
 import OrderIndex from '../components/Orders/Index.vue'
