@@ -2,7 +2,7 @@
   <div>
     <h1>Edit Coffee</h1>
 
-    <!-- แสดงฟอร์มเมื่อโหลดข้อมูลมาแล้ว -->
+    
     <div v-if="coffee">
       <p>
         Name:
@@ -23,7 +23,7 @@
         </select>
       </p>
 
-      <!-- ✅ เพิ่ม Status ตรงนี้ -->
+
       <p>
         Status:
         <select v-model="coffee.status">
@@ -37,12 +37,29 @@
         <textarea v-model="coffee.description"></textarea>
       </p>
 
+      <!-- ⭐ แสดงรูปเดิม -->
+      <div v-if="coffee.image">
+        <p>รูปปัจจุบัน:</p>
+        <img
+          :src="'http://localhost:8081/assets/coffee/' + coffee.image"
+          width="150"
+          style="border-radius: 10px;"
+        />
+      </div>
+
+      <!-- ⭐ อัปโหลดใหม่ -->
+      <div>
+        <p>อัปโหลดรูปใหม่</p>
+        <upload-image @uploaded="onUploaded"></upload-image>
+      </div>
+
       <p>
         <button @click="updateCoffee">บันทึกการแก้ไข</button>
       </p>
     </div>
 
-    <!-- ระหว่างโหลดข้อมูล -->
+
+
     <div v-else>
       Loading...
     </div>
@@ -51,8 +68,13 @@
 
 <script>
 import CoffeesService from '../../services/CoffeesService'
+import UploadImage from '../Utils/Upload.vue'
 
 export default {
+  components: {
+    UploadImage
+  },
+
   data () {
     return {
       coffee: null
@@ -65,6 +87,10 @@ export default {
   },
 
   methods: {
+    onUploaded (filename) {
+      this.coffee.image = filename
+    },
+
     async updateCoffee () {
       try {
         await CoffeesService.put(this.coffee)
@@ -76,3 +102,4 @@ export default {
   }
 }
 </script>
+

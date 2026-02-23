@@ -1,4 +1,5 @@
 import Api from './Api'
+import { useAuthenStore } from '@/stores/authen'
 
 export default {
 
@@ -11,15 +12,33 @@ export default {
   },
 
   post (coffee) {
-    return Api().post('coffee', coffee)
+    const authenStore = useAuthenStore()
+
+    return Api().post('coffee', coffee, {
+      headers: {
+        Authorization: `Bearer ${authenStore.token}`
+      }
+    })
   },
 
   put (coffee) {
-    return Api().put('coffee/' + coffee.id, coffee)
+    const authenStore = useAuthenStore()
+
+    return Api().put('coffee/' + coffee.id, coffee, {
+      headers: {
+        Authorization: `Bearer ${authenStore.token}`
+      }
+    })
   },
 
   delete (coffeeId) {
-    return Api().delete('coffee/' + coffeeId)
+    const authenStore = useAuthenStore()
+
+    return Api().delete('coffee/' + coffeeId, {
+      headers: {
+        Authorization: `Bearer ${authenStore.token}`
+      }
+    })
   }
 
 }

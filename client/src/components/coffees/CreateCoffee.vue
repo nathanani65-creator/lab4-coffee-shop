@@ -23,7 +23,7 @@
         </select>
       </div>
 
-      <!-- ✅ เพิ่ม status -->
+      
       <div>
         <label>สถานะ</label><br />
         <select v-model="coffee.status" required>
@@ -38,6 +38,12 @@
         <textarea v-model="coffee.description"></textarea>
       </div>
 
+      <!-- ⭐ เพิ่ม Upload -->
+      <div>
+        <label>อัปโหลดรูปกาแฟ</label>
+        <upload-image @uploaded="onUploaded"></upload-image>
+      </div>
+
       <br />
 
       <button type="submit">บันทึกเมนู</button>
@@ -50,20 +56,28 @@
 
 <script>
 import CoffeesService from '../../services/CoffeesService'
+import UploadImage from '../Utils/Upload.vue'
 
 export default {
+  components: {
+    UploadImage
+  },
   data () {
     return {
       coffee: {
         name: '',
         price: null,
         type: '',
-        status: '',        // ✅ เพิ่มอันนี้
-        description: ''
+        status: '',
+        description: '',
+        image: null
       }
     }
   },
   methods: {
+    onUploaded (filename) {
+      this.coffee.image = filename
+    },
     async createCoffee () {
       try {
         await CoffeesService.post(this.coffee)
@@ -79,3 +93,4 @@ export default {
   }
 }
 </script>
+

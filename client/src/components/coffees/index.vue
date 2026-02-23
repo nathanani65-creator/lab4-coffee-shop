@@ -11,24 +11,36 @@
         style="margin-bottom: 15px;"
       >
         <div>id: {{ coffee.id }}</div>
-        <div>ชื่อเมนู: {{ coffee.name }}</div>
+
+        <!-- ⭐ รูปวงกลมหน้าชื่อ -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <img
+            v-if="coffee.image"
+            :src="`http://localhost:8081/uploads/${coffee.image}`"
+            class="circle-img"
+          />
+
+          <div>ชื่อเมนู: {{ coffee.name }}</div>
+        </div>
+
         <div>ราคา: {{ coffee.price }}</div>
         <div>ประเภท: {{ coffee.type }}</div>
-        <div>สถานะ: {{ coffee.status }}</div> <!-- ✅ เพิ่มบรรทัดนี้ -->
+        <div>สถานะ: {{ coffee.status }}</div>
 
+   
         <p>
-          <!-- ทุกคนดูรายละเอียดได้ -->
+
           <button @click="navigateTo('/coffee/' + coffee.id)">
             ดูรายละเอียด
           </button>
 
-          <!-- 🔒 ปุ่มจัดการ แสดงเฉพาะตอน Login -->
+
           <template v-if="isLoggedIn">
             <button @click="navigateTo('/coffee/edit/' + coffee.id)">
               แก้ไข
             </button>
 
-            <!-- ✅ ส่ง id แทน object -->
+
             <button @click="deleteCoffee(coffee.id)">
               ลบเมนู
             </button>
@@ -72,11 +84,11 @@ export default {
       this.$router.push(route)
     },
 
-    async deleteCoffee (coffeeId) {   // ✅ รับ id
+    async deleteCoffee (coffeeId) {
       const result = confirm('Want to delete?')
       if (result) {
         try {
-          await CoffeesService.delete(coffeeId) // ✅ ส่ง id
+          await CoffeesService.delete(coffeeId)
           this.refreshData()
         } catch (err) {
           console.log(err)
@@ -90,3 +102,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.circle-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;   /* ⭐ ทำให้เป็นวงกลม */
+  object-fit: cover;    /* ⭐ ไม่ให้รูปเบี้ยว */
+  border: 1px solid #ccc;
+}
+</style>
